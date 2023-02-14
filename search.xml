@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Go基础系列  01-Golang简介</title>
+      <link href="/2023/02/14/Go%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97-01-Golang%E7%AE%80%E4%BB%8B/"/>
+      <url>/2023/02/14/Go%E5%9F%BA%E7%A1%80%E7%B3%BB%E5%88%97-01-Golang%E7%AE%80%E4%BB%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1什么是golang"><a class="markdownIt-Anchor" href="#1什么是golang"></a> 1.什么是Golang</h2><p><strong>Go</strong>（又称<strong>Golang</strong>）是Google开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。Go支持面向对象，而且具有真正的闭包(closures)和反射 (reflection)等功能。</p><h2 id="2谷歌为什么要创造go语言"><a class="markdownIt-Anchor" href="#2谷歌为什么要创造go语言"></a> 2.谷歌为什么要创造Go语言</h2><p>1.计算机硬件技术更新频繁，性能提高很快。目前主流的编程语言发展明显落后于硬件,不能合理利用多核多CPU的优势提升软件系统性能。</p><p>2.软件系统复杂度越来越高，维护成本越来越高，目前缺乏一个足够简洁高效的编程语言。【现有的编程语言：1.风格不统一 ⒉计算能力不够 3.处理大并发不够好】</p><p>3.企业运行维护很多c/c<ins>的项目，c/c</ins>程序运行速度虽然很快，但是编译速度确很慢，同时还存在内存泄漏的一系列的困扰需要解决。</p><h2 id="3go语言的发展史"><a class="markdownIt-Anchor" href="#3go语言的发展史"></a> 3.Go语言的发展史</h2><p>2007年，谷歌工程师Rob Pike，Ken Thompson 和 Robert Griesender 开始设计一门全新的语言，这是Go语言的最初原型。</p><p>2009年11月10日，Google将Go语言以开放源代码的方式向全球发布。</p><p>2015年8月19日，Go 1.5版发布，本次更新中移除了&quot;最后残余的c代码&quot;。</p><p>2017年2月17日，Go语言Go 1.8版发布。</p><p>2017年8月24日，Go语言Go 1.9版发布。</p><p>2018年2月16日，Go语言Go 1.10版发布。</p><h2 id="4go语言的学习方向"><a class="markdownIt-Anchor" href="#4go语言的学习方向"></a> 4.Go语言的学习方向</h2><p>相信很多人学习编程的目的就是为了就就业，找到一份好的工作。Golang目前的就业方向主要有以下三种：</p><p><strong>1.区块链研发工程师</strong></p><p><strong>2.Golang分布式 / 云计算软件工程师</strong></p><p><strong>3.Go服务器端 / 游戏软件工程师</strong></p><h2 id="5golang的应用领域"><a class="markdownIt-Anchor" href="#5golang的应用领域"></a> 5.Golang的应用领域</h2><p>目前Go的应用领域主要体现在以下三个方面：</p><p><strong>1.区块链技术应用</strong></p><p>区块链技术，简称 BT（Blockchain technology）,也叫作分布式账本技术，是一种互联网数据库技术，其特点是去中心化。</p><p><strong>2.后端服务器应用</strong></p><p>主要案例有：</p><ul><li>美团后台流量支撑程序。支撑主站后台流量（排序、推荐、搜索等），提供负载均衡、cache、容错，按条件分流，统计运行指标（qps，latency)等功能。</li><li>仙侠道<br />产品网址:仙侠道官网-心动游戏<br />应用范围:游戏服务端（通讯、逻辑、数据存储)</li></ul><p><strong>3.云计算/云服务后台应用</strong></p><p>案例：</p><ul><li>盛大云CDN(内容分发网络)<br />应用范围：CDN的调度系统、分发系统、监控系统、短域名服务，CDN内部开放平台、运营报表系统以及其他一些小工具等</li><li>京东消息推送云服务/京东分布式文件系统<br />应用范围：后台所有服务全部用go实现</li></ul><hr /><p>最好的学习方式就是分享你所学到的知识，所以今天开始不定期更新 Golang 系列教程。</p><p>首发地址为个人博客：<a href="https://lyx2099.github.io/">https://lyx2099.github.io/</a></p><p>Github：<a href="https://github.com/lyx2099">https://github.com/lyx2099</a></p><p>博客园：<a href="https://www.cnblogs.com/keepcode/">https://www.cnblogs.com/keepcode/</a></p><p>CSDN：<a href="https://blog.csdn.net/qq_37806690">https://blog.csdn.net/qq_37806690</a></p><p>简书：<a href="https://www.jianshu.com/u/0ff06d1da9da">https://www.jianshu.com/u/0ff06d1da9da</a></p><p>知乎：<a href="https://www.zhihu.com/people/li-shuai-77-53-43">https://www.zhihu.com/people/li-shuai-77-53-43</a></p><p>欢迎点赞关注，一起学习进步~</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Golang基础 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Golang </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HEXO + Github 博客搭建教程</title>
       <link href="/2023/02/13/HEXO/HEXO-Github-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
       <url>/2023/02/13/HEXO/HEXO-Github-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
@@ -21,31 +46,6 @@
         <tags>
             
             <tag> HEXO </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Golang开发环境搭建</title>
-      <link href="/2023/02/12/Go/Golang%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
-      <url>/2023/02/12/Go/Golang%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-      
-        <content type="html"><![CDATA[<h2 id="1下载与安装go"><a class="markdownIt-Anchor" href="#1下载与安装go"></a> 1.下载与安装Go</h2><p>官方网站：<a href="https://go.dev/">https://go.dev/</a><br />下载地址：<a href="https://go.dev/dl/">https://go.dev/dl/</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Golang基础 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Go </tag>
             
         </tags>
       
