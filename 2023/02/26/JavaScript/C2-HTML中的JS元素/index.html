@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C2 HTML中的JS元素"><meta name="keywords" content="JavaScript"><meta name="author" content="leeyx"><meta name="copyright" content="leeyx"><title>C2 HTML中的JS元素 | lee's blog</title><link rel="shortcut icon" href="/%E5%AE%87%E5%AE%99%E6%98%9F%E7%90%83.svg"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.js" defer></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?560e4df885ba17309aacb42293df35ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"1NHDWQFZXS","apiKey":"7f79ee95ec8f6d286e2c90b21df299c6","indexName":"hexoblog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#c2-html%E4%B8%AD%E7%9A%84js%E5%85%83%E7%B4%A0"><span class="toc-number">1.</span> <span class="toc-text"> C2  HTML中的JS元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#script%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.</span> <span class="toc-text"> &lt;script&gt;元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#script-%E5%85%83%E7%B4%A0%E6%9C%89%E4%B8%8B%E5%88%978%E4%B8%AA%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text"> &lt;script&gt; 元素有下列8个属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 标签位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%BF%9F%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC"><span class="toc-number">1.1.3.</span> <span class="toc-text"> 推迟执行脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC"><span class="toc-number">1.1.4.</span> <span class="toc-text"> 异步执行脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-number">1.1.5.</span> <span class="toc-text"> 动态加载脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%86%85%E4%BB%A3%E7%A0%81%E5%92%8C%E5%A4%96%E9%83%A8%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text"> 行内代码和外部文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noscript%E5%85%83%E7%B4%A0"><span class="toc-number">1.3.</span> <span class="toc-text"> &lt;noscript元素&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text"> 总结</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/blogHeadPicture.jpg"></div><div class="author-info__name text-center">leeyx</div><div class="author-info__description text-center">Respective efforts, peak bye.</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/lyx2099">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">6</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">6</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://www.zhihu.com/">zhihu</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://github.com/">github</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202302261005562.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lee's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="post-info"><div id="post-title">C2 HTML中的JS元素</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-02-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/JavaScript/">JavaScript</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.3k</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="c2-html中的js元素"><a class="markdownIt-Anchor" href="#c2-html中的js元素"></a> C2  HTML中的JS元素</h2>
+<h3 id="script元素"><a class="markdownIt-Anchor" href="#script元素"></a> <code>&lt;script&gt;</code>元素</h3>
+<h4 id="script-元素有下列8个属性"><a class="markdownIt-Anchor" href="#script-元素有下列8个属性"></a> <code>&lt;script&gt;</code> 元素有下列8个属性</h4>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>async</td>
+<td>可选。表示应该立即开始下载脚本，但不能阻止其他页面动作，比如下载资源或等待其他脚本加载。只对外部脚本文件有效</td>
+</tr>
+<tr>
+<td>defer</td>
+<td>可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有效。</td>
+</tr>
+<tr>
+<td>src</td>
+<td>可选。表示包含要执行的代码的外部文件。</td>
+</tr>
+<tr>
+<td>charset</td>
+<td>可选。使用 src 属性指定的代码字符集。</td>
+</tr>
+<tr>
+<td>crossorigin</td>
+<td>可选。配置相关请求的CORS（跨源资源共享）设置。</td>
+</tr>
+<tr>
+<td>integrity</td>
+<td>可选。允许比对接收到的资源和指定的加密签名以验证子资源完整性。如果接收到的资源的签名与这个属性指定的签名不匹配，则页面会报错，脚本不会执行。这个属性可以用于确保内容分发网络（CDN，Content Delivery Network）不会提供恶意内容。</td>
+</tr>
+<tr>
+<td>language</td>
+<td>废弃。</td>
+</tr>
+<tr>
+<td>type</td>
+<td>可选。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="标签位置"><a class="markdownIt-Anchor" href="#标签位置"></a> 标签位置</h4>
+<p>方式一：放在 <code>&lt;head&gt;</code> 标签内，但是有两个缺点：</p>
+<ul>
+<li>
+<p>所有的js下载、解析和解释完才开始渲染页面</p>
+</li>
+<li>
+<p>页面渲染延迟，影响用户体验</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example HTML Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;example1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;example2.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line"> <span class="comment">&lt;!-- 这里是页面内容 --&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>方式二：放在 <code>&lt;body&gt;</code>内容的后面</p>
+<p>优点：页面加载更快</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">head</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example HTML Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line"> <span class="comment">&lt;!-- 这里是页面内容 --&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;example1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;example2.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<h4 id="推迟执行脚本"><a class="markdownIt-Anchor" href="#推迟执行脚本"></a> 推迟执行脚本</h4>
+<p>使用 defer 属性，可以让脚本延迟到整个页面都解析完毕后再运行。简言之，defer 就是告诉浏览器先下载脚本但延迟执行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;example1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>注意：defer 属性只对外部脚本文件有效，忽略行内脚本</p>
+<h4 id="异步执行脚本"><a class="markdownIt-Anchor" href="#异步执行脚本"></a> 异步执行脚本</h4>
+<p>使用 async 属性，可以让脚本异步加载。意识就是脚本不按从上往下的顺序执行。</p>
+<p>给脚本添加 async 属性的目的，不必等待脚本下载和执行完毕后再加载页面，同样也不必等该一步脚本下载和执行完毕后再加载其他脚本。</p>
+<p>异步脚本保证会在页面的 load 事件前执行，但可能会在 DOMContentLoaded 之前或之后。</p>
+<p>async 和 defer 都只适用于外部脚本。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;example1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="动态加载脚本"><a class="markdownIt-Anchor" href="#动态加载脚本"></a> 动态加载脚本</h4>
+<p>通过向 DOM 中动态添加 script 元素可以加载指定脚本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>); </span><br><span class="line">script.<span class="property">src</span> = <span class="string">&#x27;gibberish.js&#x27;</span>; </span><br><span class="line"><span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(script); </span><br></pre></td></tr></table></figure>
+<p>将HTMLElement元素添加到DOM且执行到这段代码之前不会发送任何请求。默认情况下这种方式创建的<code>&lt;script&gt;</code>元素是异步的方式加载，相当于添加了 async 属性。</p>
+<p>要统一动态脚本的加载行为，可以将其明确设置为同步加载：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>); </span><br><span class="line">script.<span class="property">src</span> = <span class="string">&#x27;gibberish.js&#x27;</span>; </span><br><span class="line">script.<span class="property">async</span> = <span class="literal">false</span>; </span><br><span class="line"><span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(script);</span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="行内代码和外部文件"><a class="markdownIt-Anchor" href="#行内代码和外部文件"></a> 行内代码和外部文件</h3>
+<p>行内文件和外部代码两种方式，推荐使用外部文件，理由如下：</p>
+<ul>
+<li>
+<p>可维护性强：所有的js文件都放在一个目录中，便于维护。</p>
+</li>
+<li>
+<p>缓存：如果两个页面都要用到同一个js文件，而这个js文件已经被浏览器缓存，则该文件只需要下载一次。</p>
+</li>
+</ul>
+<hr />
+<h3 id="noscript元素"><a class="markdownIt-Anchor" href="#noscript元素"></a> &lt;noscript元素&gt;</h3>
+<p>如果浏览器在下列两种情况，可以使用<code>&lt;noscript&gt;</code>元素</p>
+<p>① 浏览器不支持js脚本</p>
+<p>② 浏览器对脚本的支持被关闭（禁用js脚本）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">noscript</span>&gt;</span> </span><br><span class="line">    	<span class="tag">&lt;<span class="name">p</span>&gt;</span>This page requires a JavaScript-enabled browser.<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;/<span class="name">noscript</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<ul>
+<li>
+<p>js 插入到HTML页面中有3种方式：</p>
+<ul>
+<li>行内代码</li>
+<li>外部文件引入</li>
+<li>使用 DOM API 动态添加</li>
+</ul>
+</li>
+<li>
+<p>要包含外部的js文件，需要设置 src 属性</p>
+</li>
+<li>
+<p>在不使用 async 和 defer 属性的情况下，<code>&lt;script&gt;</code>元素的解释顺序是从上往下的</p>
+</li>
+<li>
+<p>对不推迟执行的脚本，浏览器必须解释完谓语<code>&lt;script&gt;</code> 元素中的代码，才能继续渲染页面</p>
+</li>
+<li>
+<p>defer 属性把脚本推迟到文档渲染完毕后才执行。推迟的脚本按从上往下的顺序执行。</p>
+</li>
+<li>
+<p>async 属性表示脚本不需要等待其他脚本，同时也不能阻塞文档渲染，即异步加载。异步脚本不能保证按照它们出现在文档中的顺序执行。</p>
+</li>
+<li>
+<p>使用 <code>&lt;noscript&gt;</code> 元素，可以指定浏览器不支持脚本时显示内容。如果浏览器支持并启用脚本，则 <code>&lt;noscript&gt;</code> 中的任何内容都不会被渲染。</p>
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">leeyx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://lyx2099.github.io/2023/02/26/JavaScript/C2-HTML中的JS元素/">https://lyx2099.github.io/2023/02/26/JavaScript/C2-HTML中的JS元素/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2023/02/25/Shell/C3-%E5%9F%BA%E6%9C%AC%E7%9A%84bash-shell-%E5%91%BD%E4%BB%A4/"><span>C3 基本的bash shell 命令</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'e951ad2d73e1301b35ba',
+  clientSecret: '346d54aa00d48b375410b762fc4f2efbae2dbd6c',
+  repo: 'blogcomment',
+  owner: 'lyx2099',
+  admin: 'lyx2099',
+  id: md5(decodeURI(location.pathname)),
+  language: 'en'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202302261005562.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2022 - 2023 By leeyx</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/algolia.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/katex.js"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="algolia-search"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
