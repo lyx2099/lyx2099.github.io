@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="shell编程 C5-理解shell"><meta name="keywords" content="shell"><meta name="author" content="leeyx"><meta name="copyright" content="leeyx"><title>shell编程 C5-理解shell | lee's blog</title><link rel="shortcut icon" href="/%E5%AE%87%E5%AE%99%E6%98%9F%E7%90%83.svg"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.js" defer></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?560e4df885ba17309aacb42293df35ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"1NHDWQFZXS","apiKey":"7f79ee95ec8f6d286e2c90b21df299c6","indexName":"hexoblog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text"> shell 的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-%E7%9A%84%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB"><span class="toc-number">2.</span> <span class="toc-text"> shell 的父子关系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">2.1.</span> <span class="toc-text"> 前置知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%97%E8%A1%A8"><span class="toc-number">2.2.</span> <span class="toc-text"> 进程列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90shell%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text"> 子shell的用法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-shell-%E7%9A%84%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text"> 理解 shell 的内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.1.</span> <span class="toc-text"> 外部命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">3.2.</span> <span class="toc-text"> 内建命令</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/blogHeadPicture.jpg"></div><div class="author-info__name text-center">leeyx</div><div class="author-info__description text-center">Respective efforts, peak bye.</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/lyx2099">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">9</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">7</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://www.zhihu.com/">zhihu</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://github.com/">github</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042135653.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lee's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="post-info"><div id="post-title">shell编程 C5-理解shell</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-03-04</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux/">Linux</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.6k</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="shell-的类型"><a class="markdownIt-Anchor" href="#shell-的类型"></a> shell 的类型</h2>
+<p>系统启动什么样的shell，取决于个人用户的ID配置，配置文件在 /etc/passwd</p>
+<p>案例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用 cat /etc/passwd 查看，输出结果如下：</span><br><span class="line"></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line"></span><br><span class="line">第7个字段表示默认启动的 shell 程序</span><br></pre></td></tr></table></figure>
+<p>bash shell 程序位于 bin 目录内，/bin/bash 是一个可执行程序</p>
+<hr />
+<h2 id="shell-的父子关系"><a class="markdownIt-Anchor" href="#shell-的父子关系"></a> shell 的父子关系</h2>
+<h3 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h3>
+<ul>
+<li>
+<p>默认启动的 shell 是一个父shell</p>
+</li>
+<li>
+<p>在 CLI 提示符后输入 /bin/bash 命令会创建一个新的 shell 程序，这个就是子shell</p>
+</li>
+<li>
+<p>输入 bash 命令会生成一个子 shell ，但是看不到生成的相关提示信息，此时可以借助 ps 命令来查看</p>
+<p><strong>案例1：查看是否生成了子进程</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059698.png" alt="" /></p>
+<p><strong>案例1分析</strong></p>
+<p>第一次使用 ps -f 时，显示两个进程在运行，分别是 bash（进程ID1841） 和 ps -f （进程ID2429）。输入 bash 命令后产生了一个子 shell，第二个 ps -f 就是在子 shell 中执行的。从输出结果中可以看出有两个 bash 在运行。第一个 bash shell （PID 为1841）是父进程，第二个 bash shell （PID 为2430）是子进程。子shell的PPID指明了他的父进程是PID为1841的bash shell。</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059699.png" alt="" /></p>
+<p>在生成子进程时，只有部分父进程的环境会被复制到子进程的环境中，这会对包括环境变量在内的一些东西造成影响，后续会讲到。</p>
+</li>
+<li>
+<p>子进程可以从父shell中创建，也可以从另一个子shell中创建</p>
+<p><strong>案例2</strong></p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059700.png" alt="" /></p>
+<p><strong>案例2分析</strong></p>
+<p>bash 命令被输入3次，实际上就创建了3个子shell。使用 ps --forest 命令可以这是展示 shell 间的嵌套结构。下图也可以表示它们之间的嵌套结构：</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042204646.png" alt="" /></p>
+</li>
+<li>
+<p>使用 ps -f 命令然后通过查看 PID 和 PPID 也能查看 shell 进程之间的嵌套关系</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042112598.png" alt="" /></p>
+</li>
+<li>
+<p>退出子shell可以使用 exit 命令，当回到父shell时，再次使用 exit 命令将退出CLI</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113733.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="进程列表"><a class="markdownIt-Anchor" href="#进程列表"></a> 进程列表</h3>
+<ul>
+<li>
+<p>命令列表：用于在一行中依次运行一系列命令，只需要在命令之间加上分号</p>
+</li>
+<li>
+<p>将命令列表用括号括起来就成了进程列表</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113247.png" alt="" /></p>
+</li>
+<li>
+<p>命令列表变成进程列表，生成一个子shell来执行对应的命令</p>
+</li>
+<li>
+<p>进程列表是一种命令分组。另一种命令分组是将命令放在花括号中，并在命令列表末尾加上分号。语法：{command; } s使用花括号创建的命令分组不会像进程列表那样创建出子shell</p>
+</li>
+<li>
+<p>echo $BASH_SUBSHELL：要知道是否生成了子shell，可以使用 echo $BASH_SUBSHELL 来查看。返回 0 表示没有子shell，返回 1 或更大的数字表示存在子shell</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113389.png" alt="" /></p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042114601.png" alt="" /></p>
+</li>
+<li>
+<p>可以在进程列表中嵌套括号来创建子shell的子shell</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042114347.png" alt="" /></p>
+</li>
+</ul>
+<h3 id="子shell的用法"><a class="markdownIt-Anchor" href="#子shell的用法"></a> 子shell的用法</h3>
+<ul>
+<li>
+<p><strong>探索后台模式</strong></p>
+<p>后台模式中运行命令可以在处理命令的同时让出 CLI</p>
+<p><strong>案例1</strong></p>
+<p>sleep 命令用于引入一段时间的暂停，然后再返回 shell CLI 提示符，如 sleep 3，表示暂停3秒钟</p>
+<p>将 sleep 命令置入后台模式，在命令符末尾加上字符&amp;。</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042119236.png" alt="" /></p>
+<p><strong>案例1分析</strong></p>
+<p>sleep 命令会在后台（&amp;）睡眠3000秒。当它被置入后台，在 shell CLI提示符出现之前，会返回两条信息。[1] 表示后台作业号（1）。2396表示后台作业的进程ID。使用 ps -f 命令列出的进程信息可以看出 sleep 3000 被列了出来。第二列的进程ID和命令进入后台所显示的PID是一致的，都是2396。</p>
+<p><strong>jobs 命令</strong></p>
+<p>可以使用 jobs 命令来显示后台作业信息。jobs 命令可以显示出当前运行在后台模式中的所有用户进程（作业）</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042119058.png" alt="" /></p>
+<ul>
+<li>
+<p>[1]：表示作业号；Running：表示作业的当前状态。</p>
+</li>
+<li>
+<p>-l 参数能显示命令的 PID</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042120068.png" alt="" /></p>
+</li>
+<li>
+<p>一旦后台作业完成，就会显示出结束状态</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121139.png" alt="" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>将进程列表置入后台</strong></p>
+<p>案例1：将进程列表置入后台</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121539.png" alt="" /></p>
+<p>案例2：使用 tar 创建备份文件</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121658.png" alt="" /></p>
+</li>
+<li>
+<p><strong>协程</strong></p>
+<ul>
+<li>
+<p>协程可以同时做两件事：在后台生成一个子shell，并在子shell中运行命令</p>
+</li>
+<li>
+<p>coproc 命令，用于处理协程。如：</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121071.png" alt="" /></p>
+<ul>
+<li>协程会将命令置入后台模式，所以在本例中你会看到一个作业号和进程ID 2544</li>
+</ul>
+</li>
+<li>
+<p>使用 jobs 查看协程的处理状态</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042208724.png" alt="" /></p>
+<ul>
+<li>可以看到在子shell中执行的后台命令是 coproc COPROC sleep 10。这里的COPROC 是 coproc 命令给协程起得名字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="理解-shell-的内建命令"><a class="markdownIt-Anchor" href="#理解-shell-的内建命令"></a> 理解 shell 的内建命令</h2>
+<h3 id="外部命令"><a class="markdownIt-Anchor" href="#外部命令"></a> 外部命令</h3>
+<p>外部命令也叫作文件系统命令。是存在于 bash shell 之外的程序，不是 shell 程序的一部分。外部命令通常位于 /bin、/usr/bin、/sbin中。ps 命令就是一个外部命令，可以使用 which 和 type 命令找到它：</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042152342.png" alt="" /></p>
+<p>当外部命令执行时，会创建一个子进程。这种操作称为衍生（forking）。作为外部命令，ps 命令会创建出一个子进程。这里 ps 命令的 PID 是2801，父PID是2743。作为父进程的bash shell 的PID是2743。下图是外部命令执行时的衍生过程。</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121611.png" alt="" /></p>
+<h3 id="内建命令"><a class="markdownIt-Anchor" href="#内建命令"></a> 内建命令</h3>
+<p>内建命令与外部命令的区别在于内建命令不需要使用子shell来执行。它本来就是shell工具的组成部分，不需要借助外部程序来运行。可以使用 type 命令来了解某个命令是否是内建的：</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121587.png" alt="" /></p>
+<p>内建命令不需要衍生出子程序来执行，也不需要打开文件夹。所以内建命令的速度更快，效率更高。有些命令有多种实现，即它可以是内建命令也可以是外部命令。可以使用 type -a 来查看</p>
+<p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121626.png" alt="" /></p>
+<p>注意：which 只显示出外部命令文件。对于有多种实现的命令，如果想使用期外部命令实现，直接指明对应的文件即可。例如要使用外部命令pwd，可以输入 /bin/pwd</p>
+<p><strong>使用 history 命令</strong></p>
+<ul>
+<li>显示历史命令</li>
+<li>使用上一条命令可以直接输入两个感叹号 !!</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">leeyx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://lyx2099.github.io/2023/03/04/Shell/shell编程-C5-理解shell/">https://lyx2099.github.io/2023/03/04/Shell/shell编程-C5-理解shell/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/shell/">shell</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2023/03/03/Shell/Shell%E7%BC%96%E7%A8%8B-C6-%E4%BD%BF%E7%94%A8Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"><span>shell编程 C6-使用Linux环境变量</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'e951ad2d73e1301b35ba',
+  clientSecret: '346d54aa00d48b375410b762fc4f2efbae2dbd6c',
+  repo: 'blogcomment',
+  owner: 'lyx2099',
+  admin: 'lyx2099',
+  id: md5(decodeURI(location.pathname)),
+  language: 'en'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042135653.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2022 - 2023 By leeyx</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/algolia.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/katex.js"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="algolia-search"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

@@ -4,7 +4,32 @@
   
     
     <entry>
-      <title>Shell编程 C6-使用Linux环境变量</title>
+      <title>shell编程 C5-理解shell</title>
+      <link href="/2023/03/04/Shell/shell%E7%BC%96%E7%A8%8B-C5-%E7%90%86%E8%A7%A3shell/"/>
+      <url>/2023/03/04/Shell/shell%E7%BC%96%E7%A8%8B-C5-%E7%90%86%E8%A7%A3shell/</url>
+      
+        <content type="html"><![CDATA[<h2 id="shell-的类型"><a class="markdownIt-Anchor" href="#shell-的类型"></a> shell 的类型</h2><p>系统启动什么样的shell，取决于个人用户的ID配置，配置文件在 /etc/passwd</p><p>案例：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用 cat /etc/passwd 查看，输出结果如下：</span><br><span class="line"></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line"></span><br><span class="line">第7个字段表示默认启动的 shell 程序</span><br></pre></td></tr></table></figure><p>bash shell 程序位于 bin 目录内，/bin/bash 是一个可执行程序</p><hr /><h2 id="shell-的父子关系"><a class="markdownIt-Anchor" href="#shell-的父子关系"></a> shell 的父子关系</h2><h3 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h3><ul><li><p>默认启动的 shell 是一个父shell</p></li><li><p>在 CLI 提示符后输入 /bin/bash 命令会创建一个新的 shell 程序，这个就是子shell</p></li><li><p>输入 bash 命令会生成一个子 shell ，但是看不到生成的相关提示信息，此时可以借助 ps 命令来查看</p><p><strong>案例1：查看是否生成了子进程</strong></p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059698.png" alt="" /></p><p><strong>案例1分析</strong></p><p>第一次使用 ps -f 时，显示两个进程在运行，分别是 bash（进程ID1841） 和 ps -f （进程ID2429）。输入 bash 命令后产生了一个子 shell，第二个 ps -f 就是在子 shell 中执行的。从输出结果中可以看出有两个 bash 在运行。第一个 bash shell （PID 为1841）是父进程，第二个 bash shell （PID 为2430）是子进程。子shell的PPID指明了他的父进程是PID为1841的bash shell。</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059699.png" alt="" /></p><p>在生成子进程时，只有部分父进程的环境会被复制到子进程的环境中，这会对包括环境变量在内的一些东西造成影响，后续会讲到。</p></li><li><p>子进程可以从父shell中创建，也可以从另一个子shell中创建</p><p><strong>案例2</strong></p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042059700.png" alt="" /></p><p><strong>案例2分析</strong></p><p>bash 命令被输入3次，实际上就创建了3个子shell。使用 ps --forest 命令可以这是展示 shell 间的嵌套结构。下图也可以表示它们之间的嵌套结构：</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042204646.png" alt="" /></p></li><li><p>使用 ps -f 命令然后通过查看 PID 和 PPID 也能查看 shell 进程之间的嵌套关系</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042112598.png" alt="" /></p></li><li><p>退出子shell可以使用 exit 命令，当回到父shell时，再次使用 exit 命令将退出CLI</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113733.png" alt="" /></p></li></ul><h3 id="进程列表"><a class="markdownIt-Anchor" href="#进程列表"></a> 进程列表</h3><ul><li><p>命令列表：用于在一行中依次运行一系列命令，只需要在命令之间加上分号</p></li><li><p>将命令列表用括号括起来就成了进程列表</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113247.png" alt="" /></p></li><li><p>命令列表变成进程列表，生成一个子shell来执行对应的命令</p></li><li><p>进程列表是一种命令分组。另一种命令分组是将命令放在花括号中，并在命令列表末尾加上分号。语法：{command; } s使用花括号创建的命令分组不会像进程列表那样创建出子shell</p></li><li><p>echo $BASH_SUBSHELL：要知道是否生成了子shell，可以使用 echo $BASH_SUBSHELL 来查看。返回 0 表示没有子shell，返回 1 或更大的数字表示存在子shell</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042113389.png" alt="" /></p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042114601.png" alt="" /></p></li><li><p>可以在进程列表中嵌套括号来创建子shell的子shell</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042114347.png" alt="" /></p></li></ul><h3 id="子shell的用法"><a class="markdownIt-Anchor" href="#子shell的用法"></a> 子shell的用法</h3><ul><li><p><strong>探索后台模式</strong></p><p>后台模式中运行命令可以在处理命令的同时让出 CLI</p><p><strong>案例1</strong></p><p>sleep 命令用于引入一段时间的暂停，然后再返回 shell CLI 提示符，如 sleep 3，表示暂停3秒钟</p><p>将 sleep 命令置入后台模式，在命令符末尾加上字符&amp;。</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042119236.png" alt="" /></p><p><strong>案例1分析</strong></p><p>sleep 命令会在后台（&amp;）睡眠3000秒。当它被置入后台，在 shell CLI提示符出现之前，会返回两条信息。[1] 表示后台作业号（1）。2396表示后台作业的进程ID。使用 ps -f 命令列出的进程信息可以看出 sleep 3000 被列了出来。第二列的进程ID和命令进入后台所显示的PID是一致的，都是2396。</p><p><strong>jobs 命令</strong></p><p>可以使用 jobs 命令来显示后台作业信息。jobs 命令可以显示出当前运行在后台模式中的所有用户进程（作业）</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042119058.png" alt="" /></p><ul><li><p>[1]：表示作业号；Running：表示作业的当前状态。</p></li><li><p>-l 参数能显示命令的 PID</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042120068.png" alt="" /></p></li><li><p>一旦后台作业完成，就会显示出结束状态</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121139.png" alt="" /></p></li></ul></li><li><p><strong>将进程列表置入后台</strong></p><p>案例1：将进程列表置入后台</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121539.png" alt="" /></p><p>案例2：使用 tar 创建备份文件</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121658.png" alt="" /></p></li><li><p><strong>协程</strong></p><ul><li><p>协程可以同时做两件事：在后台生成一个子shell，并在子shell中运行命令</p></li><li><p>coproc 命令，用于处理协程。如：</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121071.png" alt="" /></p><ul><li>协程会将命令置入后台模式，所以在本例中你会看到一个作业号和进程ID 2544</li></ul></li><li><p>使用 jobs 查看协程的处理状态</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042208724.png" alt="" /></p><ul><li>可以看到在子shell中执行的后台命令是 coproc COPROC sleep 10。这里的COPROC 是 coproc 命令给协程起得名字</li></ul></li></ul></li></ul><hr /><h2 id="理解-shell-的内建命令"><a class="markdownIt-Anchor" href="#理解-shell-的内建命令"></a> 理解 shell 的内建命令</h2><h3 id="外部命令"><a class="markdownIt-Anchor" href="#外部命令"></a> 外部命令</h3><p>外部命令也叫作文件系统命令。是存在于 bash shell 之外的程序，不是 shell 程序的一部分。外部命令通常位于 /bin、/usr/bin、/sbin中。ps 命令就是一个外部命令，可以使用 which 和 type 命令找到它：</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042152342.png" alt="" /></p><p>当外部命令执行时，会创建一个子进程。这种操作称为衍生（forking）。作为外部命令，ps 命令会创建出一个子进程。这里 ps 命令的 PID 是2801，父PID是2743。作为父进程的bash shell 的PID是2743。下图是外部命令执行时的衍生过程。</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121611.png" alt="" /></p><h3 id="内建命令"><a class="markdownIt-Anchor" href="#内建命令"></a> 内建命令</h3><p>内建命令与外部命令的区别在于内建命令不需要使用子shell来执行。它本来就是shell工具的组成部分，不需要借助外部程序来运行。可以使用 type 命令来了解某个命令是否是内建的：</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121587.png" alt="" /></p><p>内建命令不需要衍生出子程序来执行，也不需要打开文件夹。所以内建命令的速度更快，效率更高。有些命令有多种实现，即它可以是内建命令也可以是外部命令。可以使用 type -a 来查看</p><p><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303042121626.png" alt="" /></p><p>注意：which 只显示出外部命令文件。对于有多种实现的命令，如果想使用期外部命令实现，直接指明对应的文件即可。例如要使用外部命令pwd，可以输入 /bin/pwd</p><p><strong>使用 history 命令</strong></p><ul><li>显示历史命令</li><li>使用上一条命令可以直接输入两个感叹号 !!</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>shell编程 C6-使用Linux环境变量</title>
       <link href="/2023/03/03/Shell/Shell%E7%BC%96%E7%A8%8B-C6-%E4%BD%BF%E7%94%A8Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
       <url>/2023/03/03/Shell/Shell%E7%BC%96%E7%A8%8B-C6-%E4%BD%BF%E7%94%A8Linux%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</url>
       
@@ -79,7 +104,7 @@
     
     
     <entry>
-      <title>C3 基本的bash shell 命令</title>
+      <title>shell编程 C3-基本的 bash shell 命令</title>
       <link href="/2023/02/25/Shell/Shell%E7%BC%96%E7%A8%8B-C3-%E5%9F%BA%E6%9C%AC%E7%9A%84bash-shell-%E5%91%BD%E4%BB%A4/"/>
       <url>/2023/02/25/Shell/Shell%E7%BC%96%E7%A8%8B-C3-%E5%9F%BA%E6%9C%AC%E7%9A%84bash-shell-%E5%91%BD%E4%BB%A4/</url>
       
