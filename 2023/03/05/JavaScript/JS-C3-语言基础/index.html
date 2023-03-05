@@ -41,6 +41,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (test) &#123; </span><br><span class="line">test = <span class="literal">false</span>; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(test); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<hr />
 <h2 id="变量"><a class="markdownIt-Anchor" href="#变量"></a> 变量</h2>
 <h3 id="var-声明"><a class="markdownIt-Anchor" href="#var-声明"></a> var 声明</h3>
 <p>var 可以用来定义变量，如定义一个叫 message 的变量：<code>var message;</code>。使用 var 定义变量时，不初始化，变量会保存一个特殊值 <code>undefined</code>。</p>
@@ -106,6 +107,7 @@
 <li>不使用 var。 let 和 const 变量有明确的作用域，声明位置及不变的值。</li>
 <li>const 优先，let次之。</li>
 </ul>
+<hr />
 <h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
 <h3 id="typeof-操作符"><a class="markdownIt-Anchor" href="#typeof-操作符"></a> typeof  操作符</h3>
 <p>作用：typeof 操作符用于确定变量的数据类型。例如：</p>
@@ -330,6 +332,7 @@
 <p><strong>valueOf()</strong></p>
 <p>返回对象对应的字符串、数值或布尔值表示。通常与 toString()的返回值相同。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> boo = <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">false</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(boo.<span class="title function_">valueOf</span>());		<span class="comment">// 输出 false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> num = <span class="keyword">new</span> <span class="title class_">Number</span>(<span class="number">121</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">valueOf</span>());		<span class="comment">// 输出 121</span></span><br></pre></td></tr></table></figure>
+<hr />
 <h2 id="操作符"><a class="markdownIt-Anchor" href="#操作符"></a> 操作符</h2>
 <h3 id="一元操作符"><a class="markdownIt-Anchor" href="#一元操作符"></a> 一元操作符</h3>
 <p>将加号（+）放到非数值的前面，则会执行与使用 Number() 转型函数一样的类型转换。例如：</p>
@@ -444,6 +447,7 @@
 <p>根据条件表达式 boolean_expression 的值决定将哪个值赋给变量 variable；如果 boolean_expression 的值为 true，就赋值 true_value，否则就赋值 false_value</p>
 <h3 id="逗号操作符"><a class="markdownIt-Anchor" href="#逗号操作符"></a> 逗号操作符</h3>
 <p>可以用来在一条语句中执行多个操作。例如：同时声明多个变量：<code>let num1=1, num2=2, num3=3</code></p>
+<hr />
 <h2 id="语句-2"><a class="markdownIt-Anchor" href="#语句-2"></a> 语句</h2>
 <h3 id="if-语句"><a class="markdownIt-Anchor" href="#if-语句"></a> if 语句</h3>
 <p>语法：<code>if (condition) statement1 else statement2</code></p>
@@ -509,6 +513,7 @@
 <p>语法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (expression) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="attr">value1</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="attr">value2</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="attr">value3</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="attr">value4</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="attr">default</span>:</span><br><span class="line">statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>switch 在比较每个条件时会使用全等操作符，因此不会强制类型转换，如字符串 ‘10’ 不等于 10</p>
+<hr />
 <h2 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h2>
 <p>使用 function 关键字进行声明，后跟一组参数，然后是函数体。语法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">functionName</span>(<span class="params">arg0, arg1,...,argN</span>) &#123; </span><br><span class="line">statements </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
