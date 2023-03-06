@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="shell编程 C9-安装软件程序"><meta name="keywords" content="shell"><meta name="author" content="leeyx"><meta name="copyright" content="leeyx"><title>shell编程 C9-安装软件程序 | lee's blog</title><link rel="shortcut icon" href="/%E5%AE%87%E5%AE%99%E6%98%9F%E7%90%83.svg"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.1.1/dist/instantsearch.min.js" defer></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?560e4df885ba17309aacb42293df35ce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"1NHDWQFZXS","apiKey":"7f79ee95ec8f6d286e2c90b21df299c6","indexName":"hexoblog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0"></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text"> 包管理基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-pms-%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.</span> <span class="toc-text"> 常见的 PMS 基础工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-debian-%E7%9A%84%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text"> 基于 Debian 的系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-number">2.1.</span> <span class="toc-text"> 前置知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-aptitude-%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">2.2.</span> <span class="toc-text"> 用 aptitude 管理软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-aptitude-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">2.3.</span> <span class="toc-text"> 用 aptitude 安装软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-aptitude-%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">2.4.</span> <span class="toc-text"> 用 aptitude 更新软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-aptitude-%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">2.5.</span> <span class="toc-text"> 用 aptitude 卸载软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aptitude-%E4%BB%93%E5%BA%93"><span class="toc-number">2.6.</span> <span class="toc-text"> aptitude 仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-red-hat-%E7%9A%84%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text"> 基于 Red Hat 的系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 前置知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E5%B7%B2%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">3.2.</span> <span class="toc-text"> 列出已安装包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-yum-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text"> 用 yum 安装软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-yum-%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text"> 用 yum 更新软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8-yum-%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.5.</span> <span class="toc-text"> 用 yum 卸载软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%8C%85%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">3.6.</span> <span class="toc-text"> 处理损坏的包依赖关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum-%E8%BD%AF%E4%BB%B6%E4%BB%93%E5%BA%93"><span class="toc-number">3.7.</span> <span class="toc-text"> yum 软件仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85"><span class="toc-number">4.</span> <span class="toc-text"> 从源码安装</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/blogHeadPicture.jpg"></div><div class="author-info__name text-center">leeyx</div><div class="author-info__description text-center">Respective efforts, peak bye.</div><div class="follow-button"><a target="_blank" rel="noopener" href="https://github.com/lyx2099">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">11</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">4</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">Links</div><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://www.zhihu.com/">zhihu</a><a class="author-info-links__name text-center" target="_blank" rel="noopener" href="https://github.com/">github</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303062241079.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">lee's blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/about">About</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> Search</span></a></span></div><div id="post-info"><div id="post-title">shell编程 C9-安装软件程序</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-03-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux/">Linux</a><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1.4k</span><span class="post-meta__separator">|</span><span>Reading time: 4 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="包管理基础"><a class="markdownIt-Anchor" href="#包管理基础"></a> 包管理基础</h2>
+<p>PMS：包管理系统（package mannagement system）</p>
+<p>要安装的软件包是被存储在服务器（也可以叫远程仓库）上。使用本地 PMS 搜索新的软件包然后进行安装。软件包通常会依赖于其他的包，在安装软件包之前，PMS会检测依赖关系，并将依赖安装好。</p>
+<h3 id="常见的-pms-基础工具"><a class="markdownIt-Anchor" href="#常见的-pms-基础工具"></a> 常见的 PMS 基础工具</h3>
+<ul>
+<li><strong>dpkg</strong>：基于 Debian 的发行版（如 Ubuntu、Linux Mint）使用 dpkg 命令来安装、管理和删除软件包。</li>
+<li><strong>rpm</strong>：基于 Red Hat 的发行版（如 Fedora、open）使用 rpm 来安装、删除软件。</li>
+</ul>
+<hr />
+<h2 id="基于-debian-的系统"><a class="markdownIt-Anchor" href="#基于-debian-的系统"></a> 基于 Debian 的系统</h2>
+<h3 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h3>
+<p>dpkg 命令是基于 Debian 系 PMS 工具的核心，包含在这个 PMS 中的其他工具有：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get</span><br><span class="line">apt-cache</span><br><span class="line">aptitude</span><br></pre></td></tr></table></figure>
+<p>aptitude 工具本质上是 apt 工具和 dpkg 工具的前端。dpkg 是软件包管理系统工具，而 aptitude 则是完整的软件包管理系统。</p>
+<h3 id="用-aptitude-管理软件包"><a class="markdownIt-Anchor" href="#用-aptitude-管理软件包"></a> 用 aptitude 管理软件包</h3>
+<ul>
+<li>如果已安装 aptitude，输入 aptitude 会进入全屏模式。然后下滑到 Installed Package 即可查看已安装的软件包。</li>
+<li>显示某个特定软件包的信息：<code>aptitude show package_name</code></li>
+<li>列出所有跟某个特定软件包相关的所有文件列表：<code>dpkg -L package_name</code></li>
+<li>查找某个特定文件属于哪个软件包：<code>dpkg --search absoulte_file_name</code></li>
+</ul>
+<h3 id="用-aptitude-安装软件包"><a class="markdownIt-Anchor" href="#用-aptitude-安装软件包"></a> 用 aptitude 安装软件包</h3>
+<p>使用 aptitude 安装软件包的步骤：</p>
+<ul>
+<li>使用 <code>aptitude search package_name</code> 命令查找软件包。查找结果中每个包之前都会有一个 p 或者 i。i 说明这个包已经安装到系统上；p 或 v 说明这个包可以用，但是尚未安装。</li>
+<li>使用 <code>aptitude install package_name</code> 进行安装</li>
+<li>检查是否安装成功：使用 aptitude  再次查找软件包，看结果中软件包的名字前面是否出现 i</li>
+</ul>
+<h3 id="用-aptitude-更新软件包"><a class="markdownIt-Anchor" href="#用-aptitude-更新软件包"></a> 用 aptitude 更新软件包</h3>
+<ul>
+<li>
+<p>将所有已安装的包更新到软件仓库中的最新版本（推荐使用）：<code>aptitude safe-upgrade</code></p>
+</li>
+<li>
+<p>不保守的软件升级选项（不检查包之间的依赖关系，将所有软件包升级到最新版本）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aptitude full-upgrade</span><br><span class="line"></span><br><span class="line">aptitude dist-upgrade</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="用-aptitude-卸载软件包"><a class="markdownIt-Anchor" href="#用-aptitude-卸载软件包"></a> 用 aptitude 卸载软件包</h3>
+<ul>
+<li>只删除软件包不删除数据和配置文件：<code>sudo aptitude remove package_name</code></li>
+<li>删除软件包和相关的数据和配置文件：<code>sudo aptitude purge package_name</code></li>
+<li>要看软件包是否已删除：<code>aptitude search package_name</code> 结果中软件包的前面，如果看到一个 c 意味着软件已删除，但配置文件尚未从系统中清除；如果是 p 的话，说明配置文件已删除</li>
+</ul>
+<h3 id="aptitude-仓库"><a class="markdownIt-Anchor" href="#aptitude-仓库"></a> aptitude 仓库</h3>
+<p>aptitude 默认的软件仓库存储在文件 /etc/apt/sources.list 中。aptitude 在搜索、下载或更新软件时，只会检查这些库。如果要为 PMS 添加一些额外的软件仓，就修改这个文件</p>
+<hr />
+<h2 id="基于-red-hat-的系统"><a class="markdownIt-Anchor" href="#基于-red-hat-的系统"></a> 基于 Red Hat 的系统</h2>
+<h3 id="前置知识-2"><a class="markdownIt-Anchor" href="#前置知识-2"></a> 前置知识</h3>
+<p>Red Hat 有几种不同的可用的前端工具：</p>
+<ul>
+<li>
+<p><strong>yum</strong>：在 Red Hat 和 Fedora 中使用</p>
+</li>
+<li>
+<p><strong>urpm</strong>：在 Mandriva 中使用</p>
+</li>
+<li>
+<p><strong>zypper</strong>：在 openSUSE 中使用</p>
+</li>
+</ul>
+<h3 id="列出已安装包"><a class="markdownIt-Anchor" href="#列出已安装包"></a> 列出已安装包</h3>
+<ul>
+<li>找出系统上已安装的包：<code>yum list installed</code>    输出的信息可能一闪而过。最好将结果重定向到一个文件中  <code>yum list installed &gt; installed_software</code> ，然后使用 more 或 less 命令进行查看</li>
+<li>查看包是否已安装：<code>yum list package_name</code></li>
+<li>找出系统上某个特定文件属于哪个软件包：<code>yum provides file_name</code></li>
+</ul>
+<h3 id="用-yum-安装软件"><a class="markdownIt-Anchor" href="#用-yum-安装软件"></a> 用 yum 安装软件</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">语法</span></span><br><span class="line">yum install package_name</span><br></pre></td></tr></table></figure>
+<h3 id="用-yum-更新软件"><a class="markdownIt-Anchor" href="#用-yum-更新软件"></a> 用 yum 更新软件</h3>
+<ul>
+<li>列出所有已安装包的可用更新：<code>yum list updates</code></li>
+<li>对更新列表中的所有包进行更新：<code>yum update</code></li>
+<li>更新某个特定的软件包：<code>yum update package_name</code></li>
+</ul>
+<h3 id="用-yum-卸载软件"><a class="markdownIt-Anchor" href="#用-yum-卸载软件"></a> 用 yum 卸载软件</h3>
+<ul>
+<li>只删除软件包而保留配置文件和数据文件：<code>yum remove package_name</code></li>
+<li>删除软件和所有文件：<code>yum erase package_name</code></li>
+</ul>
+<h3 id="处理损坏的包依赖关系"><a class="markdownIt-Anchor" href="#处理损坏的包依赖关系"></a> 处理损坏的包依赖关系</h3>
+<p>在安装多个软件包时，某个包的软件依赖关系可能会被另一个包的覆盖掉。这就叫做损坏的包依赖关系。出现损坏的包依赖关系修复步骤：</p>
+<ul>
+<li>先试试  <code>yum clean all</code></li>
+<li>然后使用 <code>yum update</code></li>
+<li>如果还解决不了问题，使用 <code>yum deplist package_name</code></li>
+<li>仍未解决，最后一招：<code>yum update --skip-broken</code> 该命令的<code>--skip-broken</code> 允许你忽略依赖关系损坏的包，继续更新其他软件包</li>
+</ul>
+<h3 id="yum-软件仓库"><a class="markdownIt-Anchor" href="#yum-软件仓库"></a> yum 软件仓库</h3>
+<ul>
+<li>查看从哪些仓库获取软件：<code>yum repolist</code></li>
+<li>如果仓库没有需要的软件，编辑 yum 的配置文件（位于 /etc/yum.repos.d）,添加正确的URL，并获得必要的加密密钥</li>
+</ul>
+<hr />
+<h2 id="从源码安装"><a class="markdownIt-Anchor" href="#从源码安装"></a> 从源码安装</h2>
+<p>下面用一个案例带你了解软件的解包与安装过程，以系统检测工具 sysstat 为例：</p>
+<ul>
+<li>去官网（[<a target="_blank" rel="noopener" href="http://sebastien.godard">http://sebastien.godard</a>. <a target="_blank" rel="noopener" href="http://pagesperso-orange.fr/">pagesperso-orange.fr/</a>](<a target="_blank" rel="noopener" href="http://sebastien.godard">http://sebastien.godard</a>. <a target="_blank" rel="noopener" href="http://pagesperso-orange.fr/">pagesperso-orange.fr/</a>)）下载sysstat 的tarball 包，单击 download</li>
+<li>将文件下载到 linux 上，进行解包。要解包一个软件的 tarball，用 tar 命令：<code>tar -zxvf sysstat-11.1.1.tar.gz</code></li>
+<li>解包后所有文件都放在了 sysstat 目录下，使用 cd sysstat 进入该目录。使用 ls 列出目录内容。查看 README 或 AAAREADME 文件。该文件包含文件安装所需要的所有操作。</li>
+<li>为系统配置 sysstat，执行 sysstat 目录下的 configure 文件，<code>./configure</code></li>
+<li>使用 <code>make</code> 命令构建二进制文件。<code>make</code> 命令会编译源码，链接器回味这个包创建最终的可执行文件</li>
+<li>以 root 用户登录，执行命令 <code>make install</code></li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">leeyx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://lyx2099.github.io/2023/03/06/Shell/shell编程-C9-安装软件程序/">https://lyx2099.github.io/2023/03/06/Shell/shell编程-C9-安装软件程序/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/shell/">shell</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2023/03/05/JavaScript/JS-C3-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"><span>JS C3-语言基础</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: 'e951ad2d73e1301b35ba',
+  clientSecret: '346d54aa00d48b375410b762fc4f2efbae2dbd6c',
+  repo: 'blogcomment',
+  owner: 'lyx2099',
+  admin: 'lyx2099',
+  id: md5(decodeURI(location.pathname)),
+  language: 'en'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg" style="background-image: url(https://cdn.staticaly.com/gh/lyx2099/ImageHosting@main/images/2023/202303062241079.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2022 - 2023 By leeyx</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/algolia.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/katex.js"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="algolia-search"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
