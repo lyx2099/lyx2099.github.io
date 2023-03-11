@@ -63,7 +63,8 @@
 <hr />
 <h2 id="显示消息"><a class="markdownIt-Anchor" href="#显示消息"></a> 显示消息</h2>
 <p>echo 命令：将消息显示在控制台显示器上。例如：<code>echo &quot;Hello World!&quot;</code></p>
-<p>默认情况下不需要用引号将字符串包裹起来，但是假如字符串中有引号的话，就需要使用单引号或者双引号将字符串包裹起来。例如：<code>echo &quot;It's beautiful.&quot;</code></p>
+<p>默认情况下不需要用引号将字符串包裹起来，但是假如字符串中有引号的话，就需要使用单引号或者双引号将字符串包裹起来。例如：<br />
+<code>echo &quot;It's beautiful.&quot;</code></p>
 <p>-n 参数：不加 -n 参数的 echo 输出完会换行，加了 -n 参数不会换行。例如</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这是我写的第一个shell脚本</span></span><br><span class="line"></span><br><span class="line">echo -n &quot;显示时间是：&quot;</span><br><span class="line">date</span><br><span class="line">echo &quot;当前登录的用户是：&quot;</span><br><span class="line">who</span><br></pre></td></tr></table></figure>
 <p>输出结果：</p>
@@ -118,12 +119,10 @@
 </ul>
 <p>注意：在将一个变量的值赋值个另一个变量时，也需要使用 $ 符号。例如</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">正确做法</span></span><br><span class="line"></span><br><span class="line">value01=10</span><br><span class="line">value02=$value01</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">错误做法</span></span><br><span class="line"></span><br><span class="line">value01=10</span><br><span class="line">value03=value01</span><br><span class="line"></span><br><span class="line">echo $value02</span><br><span class="line">echo $value03</span><br></pre></td></tr></table></figure>
-<p>脚本输出结果，可以看出不使用 $ 符号，shell会将变量名解释成普通的文本字符串</p>
-<pre><code>10
-value01
-</code></pre>
+<p>脚本输出结果，可以看出不使用 $ 符号，shell会将变量名解释成普通的文本字符串:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">value01</span><br></pre></td></tr></table></figure>
 <h3 id="命令替换"><a class="markdownIt-Anchor" href="#命令替换"></a> 命令替换</h3>
-<p>命令替换的作用就是将shell命令的输出结果赋值给另一个变量，它有两种实现方法</p>
+<p>命令替换的作用就是将shell命令的输出结果赋值给另一个变量，它有两种实现方法：</p>
 <ul>
 <li>使用反引号 ``（注意反引号是和波浪号在同一键位上的那个反引号）</li>
 <li>使用 $() 的格式</li>
@@ -131,8 +130,7 @@ value01
 <p><strong>案例1</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- #!/bin/bash</span><br><span class="line"></span><br><span class="line">使用命令替换案例</span><br><span class="line"></span><br><span class="line">now=`date`</span><br><span class="line">user=$(whoami) </span><br><span class="line"></span><br><span class="line">echo &quot;当前日期和时间是：&quot;$now</span><br><span class="line">echo &quot;当前登录的用户是: &quot; $user</span><br></pre></td></tr></table></figure>
 <p>案例1输出结果：</p>
-<pre><code><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  当前日期和时间是：2023年 03月 07日 星期二 23:28:27 CST</span><br><span class="line">	当前登录的用户是:  root</span><br><span class="line">  ```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**案例2：提取日期信息来生成日志文件名**</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 提取日期信息生成日志文件名</span><br><span class="line"></span><br><span class="line">today=$(date +%y%m%d)</span><br><span class="line">ls /usr/bin -al &gt; log.$today</span><br></pre></td></tr></table></figure>
-</code></pre>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">当前日期和时间是：2023年 03月 07日 星期二 23:28:27 CST</span><br><span class="line">当前登录的用户是:  root</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">**案例2：提取日期信息来生成日志文件名**</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 提取日期信息生成日志文件名</span><br><span class="line"></span><br><span class="line">today=$(date +%y%m%d)</span><br><span class="line">ls /usr/bin -al &gt; log.$today</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p><code>+%y%m%d</code>  格式告诉 <code>date</code> 命令将日期显示为两位数的年月日的组合</p>
@@ -159,20 +157,21 @@ value01
 <p>记忆技巧：在命令行上，命令总是在左侧，而重定向符号指向数据流动的方向。小于符号说明数据正在从输入文件流向命令。</p>
 </li>
 <li>
-<p><code>wc</code> 命令：使用 <code>wc</code>命令可以数据中的文本进行统计。默认情况下，它会输出3个值</p>
-</li>
-<li>
-<p>文本的行数</p>
+<p><code>wc</code> 命令：使用 <code>wc</code>命令可以数据中的文本进行统计。默认情况下，它会输出3个值：</p>
+<ul>
+<li>文本的行数
 <ul>
 <li>文本的词数</li>
 <li>文本的字节数</li>
 </ul>
 </li>
+</ul>
+</li>
 <li>
 <p>案例：<code>wc &lt; login.py</code></p>
-<ul>
-<li>输出结果：2  11  60   表示 <a target="_blank" rel="noopener" href="http://login.py">login.py</a> 中有2行、11个单词以及601个字节</li>
-</ul>
+</li>
+<li>
+<p>输出结果：2  11  60   表示 <a target="_blank" rel="noopener" href="http://login.py">login.py</a> 中有2行、11个单词以及601个字节</p>
 </li>
 </ul>
 <h3 id="内联输入重定向"><a class="markdownIt-Anchor" href="#内联输入重定向"></a> 内联输入重定向</h3>
@@ -191,7 +190,8 @@ value01
 </ul>
 <hr />
 <h2 id="管道"><a class="markdownIt-Anchor" href="#管道"></a> 管道</h2>
-<p>将一个命令的输入作为另一个命令的输出，这就是管道。管道符号使用竖线表示（|），它和反斜线（\）位于同一个键。语法：<code>command1 | command2</code></p>
+<p>将一个命令的输入作为另一个命令的输出，这就是管道。管道符号使用竖线表示（|），它和反斜线（\）位于同一个键。语法：<br />
+<code>command1 | command2</code></p>
 <p>管道串起来的两个命令会同时执行。在第一个命令产生输出的同时，输出会立即送给第二个命令。数据传输不会用到任何中间的文件或缓冲区。</p>
 <p>案例：利用管道将 <code>rpm</code>命令的输出送入 <code>sort</code>命令来产生结果。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | sort | more</span><br></pre></td></tr></table></figure>
@@ -303,11 +303,11 @@ value01
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> test13</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">testing the <span class="built_in">exit</span> status</span> </span><br><span class="line">var1=10 </span><br><span class="line">var2=30 </span><br><span class="line">var3=$[$var1 + $var2] </span><br><span class="line">echo The answer is $var3 </span><br><span class="line">exit 5</span><br></pre></td></tr></table></figure>
 <p>运行脚本的查看退出码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> u+x test13</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./test13</span> </span><br><span class="line">The answer is 40 </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span> </span><br><span class="line">5 </span><br></pre></td></tr></table></figure>
-<p>也可以在 exit 命令的参数中使用变量</p>
+<p>也可以在 exit 命令的参数中使用变量：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> test14</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">testing the <span class="built_in">exit</span> status</span> </span><br><span class="line">var1=10 </span><br><span class="line">var2=30 </span><br><span class="line">var3=$[$var1 + $var2] </span><br><span class="line">exit $var3 </span><br><span class="line"><span class="meta prompt_">$ </span></span><br></pre></td></tr></table></figure>
 <p>运行脚本会得到如下状态码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> u+x test14</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./test14</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span> </span><br><span class="line">40 </span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：退出状态码的最大值只能是255。如果你自定义返回的状态码的值超过了255，那么实际返回的值是你设定的值除以256后得到的余数。例如下面这个例子中指定退出状态码是300，实际上返回的是300%256=44。例如：</p>
+<p><strong>注意</strong>：退出状态码的最大值只能是255。如果你自定义返回的状态码的值超过了255，那么实际返回的值是你设定的值除以256后得到的余数。例如下面这个例子中指定退出状态码是300，实际上返回的是300%256=44。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> test14b</span> </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">testing the <span class="built_in">exit</span> status</span> </span><br><span class="line">var1=10 </span><br><span class="line">var2=30 </span><br><span class="line">var3=$[$var1 * $var2] </span><br><span class="line">echo The value is $var3 </span><br><span class="line">exit $var3 </span><br><span class="line"><span class="meta prompt_">$ </span></span><br></pre></td></tr></table></figure>
 <p>运行脚本查看结果：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./test14b</span></span><br><span class="line">The value is 300 </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span> </span><br><span class="line">44 </span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">leeyx</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://lyx2099.github.io/2023/03/09/Shell/shell编程-C11-构建基本脚本/">https://lyx2099.github.io/2023/03/09/Shell/shell编程-C11-构建基本脚本/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/shell/">shell</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2023/03/06/Shell/shell%E7%BC%96%E7%A8%8B-C9-%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E7%A8%8B%E5%BA%8F/"><span>shell编程 C9-安装软件程序</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
